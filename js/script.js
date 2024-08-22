@@ -89,33 +89,19 @@ document.addEventListener('DOMContentLoaded', function () {
     const playPauseBtn = document.getElementById('play-pause-btn');
     const currentTimeSpan = document.getElementById('current-time');
     const durationSpan = document.getElementById('duration');
-    const seekBar = document.getElementById('seek-bar');
     const volumeControl = document.getElementById('volume-control');
-    const volumeIcon = document.getElementById('volume-icon');
-    const songSelector = document.getElementById('song-selector');
-    const songTitle = document.getElementById('song-title');
 
     // Initialize the controller
     backgroundMusic.volume = volumeControl.value;
-
-    // Update the song title and load the selected song
-    songSelector.addEventListener('change', function () {
-        backgroundMusic.src = songSelector.value;
-        songTitle.textContent = songSelector.options[songSelector.selectedIndex].text;
-        backgroundMusic.play();
-        playPauseBtn.textContent = 'Pause';
-    });
-
+    
     // Update the duration once the metadata is loaded
     backgroundMusic.addEventListener('loadedmetadata', function() {
         durationSpan.textContent = formatTime(backgroundMusic.duration);
-        seekBar.max = Math.floor(backgroundMusic.duration);
     });
 
-    // Update current time and seek bar as the song plays
+    // Update current time as the song plays
     backgroundMusic.addEventListener('timeupdate', function() {
         currentTimeSpan.textContent = formatTime(backgroundMusic.currentTime);
-        seekBar.value = Math.floor(backgroundMusic.currentTime);
     });
 
     // Play/Pause functionality
@@ -129,39 +115,10 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Seek bar control
-    seekBar.addEventListener('input', function() {
-        backgroundMusic.currentTime = seekBar.value;
-    });
-
     // Volume control
     volumeControl.addEventListener('input', function() {
         backgroundMusic.volume = volumeControl.value;
-        updateVolumeIcon();
     });
-
-    // Mute/Unmute on volume icon click
-    volumeIcon.addEventListener('click', function() {
-        if (backgroundMusic.muted) {
-            backgroundMusic.muted = false;
-            volumeControl.value = backgroundMusic.volume;
-        } else {
-            backgroundMusic.muted = true;
-            volumeControl.value = 0;
-        }
-        updateVolumeIcon();
-    });
-
-    // Update volume icon based on volume level
-    function updateVolumeIcon() {
-        if (backgroundMusic.muted || backgroundMusic.volume === 0) {
-            volumeIcon.textContent = '🔇';
-        } else if (backgroundMusic.volume <= 0.5) {
-            volumeIcon.textContent = '🔉';
-        } else {
-            volumeIcon.textContent = '🔊';
-        }
-    }
 
     // Format time in minutes and seconds
     function formatTime(seconds) {

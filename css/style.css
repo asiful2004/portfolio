@@ -1105,12 +1105,6 @@ body.dark .shadow-dark {
   z-index: 1000;
 }
 
-#song-title {
-  font-size: 14px;
-  margin-right: 10px;
-  font-weight: bold;
-}
-
 #play-pause-btn {
   background-color: #3498db;
   border: none;
@@ -1122,24 +1116,6 @@ body.dark .shadow-dark {
 
 #play-pause-btn:hover {
   background-color: #2980b9;
-}
-
-#current-time, #duration {
-  font-size: 12px;
-}
-
-#seek-bar {
-  width: 100px;
-}
-
-#volume-container {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-#volume-icon {
-  cursor: pointer;
 }
 
 #volume-control {
