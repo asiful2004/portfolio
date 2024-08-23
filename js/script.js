@@ -127,3 +127,10 @@ document.addEventListener('DOMContentLoaded', function () {
         return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
     }
 });
+
+window.addEventListener('load', function() {
+    const preloader = document.getElementById('custom-preloader');
+    preloader.style.opacity = '0';
+    preloader.style.visibility = 'hidden';
+    preloader.style.transition = 'visibility 0s 1s, opacity 1s linear'; // Optional: smooth fade-out
+});
